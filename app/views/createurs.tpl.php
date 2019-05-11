@@ -1,4 +1,3 @@
-
 <header>
     <a href="index.html">lien vers la homepage</a>
   </header>

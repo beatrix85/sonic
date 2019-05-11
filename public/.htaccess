@@ -1,8 +1,6 @@
 RewriteEngine On
 
 # dynamically setup base URI
-# Transmet à PHP la variable d'environnement serveur
-# BASE_URI via $_SERVER
 RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
 RewriteRule ^(.*) - [E=BASE_URI:%1]
 
@@ -20,3 +18,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 
 # AltoRouter versiob
 RewriteRule . index.php [L]
+
+# l'expression régulière ci-dessus (regex) nous permet sur cette URL
+# http://localhost/rocket/e03/s05-e03-oshop-jc-oclock/public/catalog/category/1
+# de récupèrer tous les caractères en fin d'URL
+# et nous les renvoyer dans la variable $1
+# cf : https://regex101.com/

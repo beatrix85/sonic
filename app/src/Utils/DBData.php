@@ -20,7 +20,7 @@ class DBData
 
         // (to) Parse = Analyser
         // Versionner = gestion de versions multiples du code source = Git
-        $configData = parse_ini_file(__DIR__.'/../config.conf');
+        $configData = parse_ini_file(__DIR__.'/../../../config.conf');
         
         try {
             $this->dbh = new PDO(
@@ -29,6 +29,7 @@ class DBData
                 $configData['DB_PASSWORD'],
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING) // Affiche les erreurs SQL à l'écran
             );
+            dd($this->dbh);
         } catch (\Exception $exception) {
             echo 'Erreur de connexion...<br>';
             echo $exception->getMessage().'<br>';
@@ -39,18 +40,20 @@ class DBData
         }
     }
 
-    public function getCharacter($charcterId)
+    public function getCharacters()
     {
-        $sql = 'SELECT `character`.*,`name`, `description`, `picture`,
-         FROM `character`
-         WHERE `name`, `description`, `picture`,';
+        $sql = 'SELECT * 
+        FROM `character` 
+        ORDER BY `name` ASC;';
 
            // On effectue la requête sur le serveur
         $result = $this->dbh->query($sql);
         // On récupère le résultat de la requête via $result
-        $product = $result->fetch(PDO::FETCH_ASSOC);
+        $characters = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        return $character;
+        dd($characters);
+
+        return $characters;
     }
 
 

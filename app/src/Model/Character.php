@@ -1,7 +1,7 @@
 <?php
 // entité charactere de le BDD
 
-class Character
+class Character extends CoreModel
 {
     private $name;
     private $description;
